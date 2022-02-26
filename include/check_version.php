@@ -14,13 +14,18 @@
 $yakpro_po_base_directory = dirname(realpath($argv[0]));
 $php_parser_git_commandline = 'git clone https://github.com/nikic/PHP-Parser.git';
 
-$php_parser_path = realpath(__DIR__ . '/../' . PHP_PARSER_DIRECTORY);
-if (!is_dir($php_parser_path)) {
-  $php_parser_path = PHP_PARSER_DIRECTORY;
-  if (!is_dir($php_parser_path) && !is_file("$php_parser_path/lib/PhpParser/Builder.php")) {
-    fprintf(STDERR, "Error:\tPHP-Parser is not correctly installed!%sYou can try to use the following command:%s\t# %s%s", PHP_EOL, PHP_EOL, $php_parser_git_commandline, PHP_EOL);
-    exit(23);
+$base_dir = dirname(__DIR__);
+$php_parser_paths = [PHP_PARSER_DIRECTORY, $base_dir . '/' . PHP_PARSER_DIRECTORY, "$base_dir/../../nikic/php-parser"];
+$php_parser_path = false;
+foreach ($php_parser_paths as $path) {
+  if (is_dir($path) && is_file("$path/lib/PhpParser/Builder.php")) {
+    $php_parser_path = realpath($path);
+    break;
   }
+}
+if (!$php_parser_path) {
+  fprintf(STDERR, "Error:\tPHP-Parser is not correctly installed!%sYou can try to use the following command:%s\t# %s%s", PHP_EOL, PHP_EOL, $php_parser_git_commandline, PHP_EOL);
+  exit(23);
 }
 
 $t_composer = json_decode(file_get_contents("$php_parser_path/composer.json"));   //print_r($t_composer);
