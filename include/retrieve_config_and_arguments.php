@@ -100,7 +100,7 @@ $t_where[] = "config/$config_file_name";                   // current_working_di
 if (($x = getenv('HOME')) !== false) $t_where[] = "$x/$config_file_name";                       // HOME
 if ($x !== false) $t_where[] = "$x/config/$config_file_name";                // HOME/config
 $t_where[] = "/usr/local/YAK/yakpro-po/$config_file_name"; // /usr/local/YAK/yakpro-po
-$t_where[] = "$yakpro_po_dirname/yakpro-po.cnf";               // source_code_directory/default_conf_filename
+$t_where[] = "$yakpro_po_dirname/$config_file_name";               // source_code_directory/default_conf_filename
 
 foreach ($t_where as $dummy => $where) {
   if (check_config_file($where)) {
