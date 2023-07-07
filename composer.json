@@ -1,6 +1,6 @@
 {
   "name": "pmdunggh/yakpro-po",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "library",
   "description": "YAK Pro - Php Obfuscator: A fork from pk-fr/yakpro-po with customize for Ohke framework",
   "keywords": [
