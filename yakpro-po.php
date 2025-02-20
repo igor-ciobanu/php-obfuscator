@@ -49,22 +49,8 @@ use PhpParser\ParserFactory;
 use PhpParser\NodeTraverser;
 use PhpParser\PrettyPrinter;
 
-switch ($conf->parser_mode) {
-  case 'PREFER_PHP7':
-    $parser_mode = ParserFactory::PREFER_PHP7;
-    break;
-  case 'ONLY_PHP7':
-    $parser_mode = ParserFactory::ONLY_PHP7;
-    break;
-  case 'ONLY_PHP5':
-    $parser_mode = ParserFactory::ONLY_PHP5;
-    break;
-  default:
-    $parser_mode = ParserFactory::PREFER_PHP5;
-    break;
-}
 
-$parser = (new ParserFactory)->create($parser_mode);
+$parser = (new ParserFactory)->createForVersion(\PhpParser\PhpVersion::fromString('8.1'));
 
 
 $traverser = new NodeTraverser;
